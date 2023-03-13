@@ -19,7 +19,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('medicamento', MedicamentoController::class);
 
 Route::middleware([
     'auth:sanctum',
@@ -30,3 +29,6 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+
+Route::resource('medicamento', MedicamentoController::class);

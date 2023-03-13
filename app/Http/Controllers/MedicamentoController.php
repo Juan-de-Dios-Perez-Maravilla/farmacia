@@ -12,7 +12,8 @@ class MedicamentoController extends Controller
      */
     public function index()
     {
-        return view('medicamento.medicamento-index');
+        $medicamentos = Medicamento::get();        
+        return view('medicamento.medicamento-index', compact('medicamentos'));
     }
 
     /**
@@ -20,6 +21,7 @@ class MedicamentoController extends Controller
      */
     public function create()
     {
+
         return view('medicamento.medicamento-form');
     }
 
@@ -28,7 +30,18 @@ class MedicamentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //$medicamento = new Medicamento();
+        //$medicamento->nombre = $request->nombre;
+        //$medicamento->clasificacion = $request->clasificacion;
+        //$medicamento->potencia = $request->potencia;
+        //$medicamento->precio = $request->precio;
+        //$medicamento->propiedades = $request->propiedades;
+        //$medicamento->laboratorio = $request->laboratorio;
+        //$medicamento->save();
+
+        Medicamento::create($request->all());
+
+        return redirect()->route('medicamento.index');
     }
 
     /**
@@ -36,7 +49,7 @@ class MedicamentoController extends Controller
      */
     public function show(Medicamento $medicamento)
     {
-        return view('medicamento.medicamento-show');
+        return view('medicamento.medicamento-show', compact('medicamento'));
     }
 
     /**
@@ -44,7 +57,7 @@ class MedicamentoController extends Controller
      */
     public function edit(Medicamento $medicamento)
     {
-        return view('medicamento.medicamento-form');
+        return view('medicamento.medicamento-form', compact('medicamento'));
     }
 
     /**
@@ -52,7 +65,9 @@ class MedicamentoController extends Controller
      */
     public function update(Request $request, Medicamento $medicamento)
     {
-        //
+        Medicamento::where('id', $medicamento->id)->update($request->except('_token', '_method'));
+
+        return redirect()->route('medicamento.show', $medicamento);
     }
 
     /**
@@ -60,6 +75,7 @@ class MedicamentoController extends Controller
      */
     public function destroy(Medicamento $medicamento)
     {
-        //
+        $medicamento->delete();
+        return redirect()->route('medicamento.index');
     }
 }
