@@ -30,15 +30,15 @@ class MedicamentoController extends Controller
      */
     public function store(Request $request)
     {
-        //$medicamento = new Medicamento();
-        //$medicamento->nombre = $request->nombre;
-        //$medicamento->clasificacion = $request->clasificacion;
-        //$medicamento->potencia = $request->potencia;
-        //$medicamento->precio = $request->precio;
-        //$medicamento->propiedades = $request->propiedades;
-        //$medicamento->laboratorio = $request->laboratorio;
-        //$medicamento->save();
-
+        
+        $request->validate([
+            'nombre' => ['required', 'string', 'min:5', 'max:255'],
+            'clasificacion' => 'required|string|min:5|max:255',
+            'potencia' => 'required|integer|min:1',
+            'precio' => 'required|integer|min:1',
+            'propiedades' => 'required|string|min:5|max:255',
+            'laboratorio' => 'required|string|min:3|max:255',
+        ]);
         Medicamento::create($request->all());
 
         return redirect()->route('medicamento.index');
@@ -65,6 +65,14 @@ class MedicamentoController extends Controller
      */
     public function update(Request $request, Medicamento $medicamento)
     {
+        $request->validate([
+            'nombre' => ['required', 'string', 'min:5', 'max:255'],
+            'clasificacion' => 'required|string|min:5|max:255',
+            'potencia' => 'required|integer|min:1',
+            'precio' => 'required|integer|min:1',
+            'propiedades' => 'required|string|min:5|max:255',
+            'laboratorio' => 'required|string|min:3|max:255',
+        ]);
         Medicamento::where('id', $medicamento->id)->update($request->except('_token', '_method'));
 
         return redirect()->route('medicamento.show', $medicamento);

@@ -6,6 +6,21 @@
 
     <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
 
+        @if ($errors->any())
+            <div class="min-w-0 p-4 text-white bg-purple-600 rounded-lg shadow-xs">
+                    <h4 class="mb-4 font-semibold">
+                    Favor de verificar los campos del formulario
+                    </h4>
+                    <p>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </p>
+            </div>
+        @endif
+
         @if(isset($medicamento))
             <!-- Edición de medicamento-->
             <form action=" {{ route('medicamento.update', $medicamento) }}" method="POST">
@@ -24,8 +39,11 @@
                 type="text"
                 name="nombre"
                 id="nombre"
-                value="{{ $medicamento->nombre ?? '' }}"
+                value="{{ old('nombre') ?? $medicamento->nombre ?? '' }}"
             />
+            @error('nombre')
+                <span class="text-xs text-red-600 dark:text-red-400">{{ $message }}</span>
+            @enderror
         </label>
 
         <label class="block text-sm">
@@ -35,8 +53,11 @@
                 type="text"
                 name="clasificacion"
                 id="clasificacion"
-                value="{{ $medicamento->clasificacion ?? '' }}"
+                value="{{ old('clasificacion') ?? $medicamento->clasificacion ?? '' }}"
             />
+            @error('clasificacion')
+                <span class="text-xs text-red-600 dark:text-red-400">{{ $message }}</span>
+            @enderror
         </label>
 
         <label class="block text-sm">
@@ -46,8 +67,11 @@
                 type="number"
                 name="potencia"
                 id="potencia"
-                value="{{ $medicamento->potencia ?? '' }}"
+                value="{{ old('potencia') ?? $medicamento->potencia ?? '' }}"
             />
+            @error('potencia')
+                <span class="text-xs text-red-600 dark:text-red-400">{{ $message }}</span>
+            @enderror
         </label>
 
         <label class="block text-sm">
@@ -57,8 +81,11 @@
                 type="number"
                 name="precio"
                 id="precio"
-                value="{{ $medicamento->precio ?? '' }}"
+                value="{{ old('precio') ?? $medicamento->precio ?? '' }}"
             />
+            @error('precio')
+                <span class="text-xs text-red-600 dark:text-red-400">{{ $message }}</span>
+            @enderror
         </label>
 
         <label class="block text-sm">
@@ -68,8 +95,11 @@
                 type="text"
                 name="propiedades"
                 id="propiedades"
-                value="{{ $medicamento->propiedades ?? '' }}"
+                value="{{ old('propiedades') ?? $medicamento->propiedades ?? '' }}"
             />
+            @error('propiedades')
+                <span class="text-xs text-red-600 dark:text-red-400">{{ $message }}</span>
+            @enderror
         </label>
 
         <label class="block text-sm">
@@ -79,8 +109,11 @@
                 type="text"
                 name="laboratorio"
                 id="laboratorio"
-                value="{{ $medicamento->laboratorio ?? '' }}"
+                value="{{ old('laboratorio') ?? $medicamento->laboratorio ?? '' }}"
             />
+            @error('laboratorio')
+                <span class="text-xs text-red-600 dark:text-red-400">{{ $message }}</span>
+            @enderror
         </label>
 
             <div class="mt-4">
