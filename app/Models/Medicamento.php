@@ -11,7 +11,13 @@ class Medicamento extends Model
     use HasFactory;
    // use SoftDeletes;
 
-    protected $fillable = ['nombre', 'clasificacion', 'potencia', 'precio', 'propiedades', 'laboratorio'];
+    protected $fillable = ['nombre', 'clasificacion', 'potencia', 'precio', 'propiedades', 'laboratorio', 'user_id'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+
+    }
 
    // public $timestamps = false;
 }

@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Medicamento;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class MedicamentoController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Muestra listado de medicamentos de usuario que ha ingresado.
      */
     public function index()
     {
-        $medicamentos = Medicamento::get();        
+        
+        $medicamentos = Auth::user()->medicamentos;
+
         return view('medicamento.medicamento-index', compact('medicamentos'));
     }
 
@@ -39,6 +41,8 @@ class MedicamentoController extends Controller
             'propiedades' => 'required|string|min:5|max:255',
             'laboratorio' => 'required|string|min:3|max:255',
         ]);
+        
+        $request->merge(['user_id' => Auth::id()]);
         Medicamento::create($request->all());
 
         return redirect()->route('medicamento.index');

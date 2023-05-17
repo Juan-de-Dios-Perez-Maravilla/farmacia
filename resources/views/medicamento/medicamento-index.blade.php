@@ -30,6 +30,7 @@
             <th class="px-4 py-3">Precio</th>
             <th class="px-4 py-3">Propiedades</th>
             <th class="px-4 py-3">Laboratorio</th>
+            <th class="px-4 py-3">Usuario</th>
             <th class="px-4 py-3">Acciones</th>
         </tr>
         </thead>
@@ -58,6 +59,9 @@
             </td>
             <td class="px-4 py-3 text-sm">
                 {{ $medicamento->laboratorio }}
+            </td>
+            <td class="px-4 py-3 text-sm">
+                {{ $medicamento->user->name }}
             </td>
             <td class="px-4 py-3">
             <div class="flex items-center space-x-4 text-sm">
