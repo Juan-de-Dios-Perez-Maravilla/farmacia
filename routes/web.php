@@ -36,4 +36,4 @@ Route::middleware([
 });
 
 
-Route::resource('medicamento', MedicamentoController::class);
+Route::resource('medicamento', MedicamentoController::class)->middleware('auth');
