@@ -35,5 +35,5 @@ Route::middleware([
     })->name('dashboard');
 });
 
-
+Route::post('medicamento/{medicamento}/agrega-responsable', [MedicamentoController::class, 'agregaResponsable'])->name('medicamento.agrega-responsable');
 Route::resource('medicamento', MedicamentoController::class)->middleware('auth');

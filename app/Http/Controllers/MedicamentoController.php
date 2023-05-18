@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Responsable;
 use App\Models\Medicamento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -54,7 +55,8 @@ class MedicamentoController extends Controller
      */
     public function show(Medicamento $medicamento)
     {
-        return view('medicamento.medicamento-show', compact('medicamento'));
+        $responsables = Responsable::get();
+        return view('medicamento.medicamento-show', compact('medicamento', 'responsables'));
     }
 
     /**
@@ -90,5 +92,18 @@ class MedicamentoController extends Controller
     {
         $medicamento->delete();
         return redirect()->route('medicamento.index');
+    }
+
+
+    /**
+     * Agregar un responsable a un medicamento.
+     */
+
+    public function agregaResponsable(Request $request, Medicamento $medicamento)
+    {
+        $medicamento->responsables()->sync($request->responsable_id);
+
+        return redirect()->route('medicamento.show', $medicamento);
+
     }
 }

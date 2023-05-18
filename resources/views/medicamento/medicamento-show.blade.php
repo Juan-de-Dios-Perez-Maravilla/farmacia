@@ -21,8 +21,61 @@
         </ul>
     </p>
     </div>
-    
+
+    <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+            <h4 class="mb-4 font-semibold text-gray-600 dark:text-gray-300">
+                Responsables de los medicamentos
+            </h4>
+            <p class="text-gray-600 dark:text-gray-400">
+                <ul>
+                    @foreach ($medicamento->responsables as $responsable)
+                        <li>{{ $responsable->nombre  }}</li>
+                    @endforeach
+                    
+                </ul>
+            </p>
+    </div>
+
 </div>
+
+    <div class="grid gap-6 mb-8 md:grid-cols-2">
+
+        <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+            <h4 class="mb-4 font-semibold text-gray-600 dark:text-gray-300">
+                Agregar Responsables
+            </h4>
+            <p class="text-gray-600 dark:text-gray-400">
+                <form action="{{ route('medicamento.agrega-responsable', $medicamento) }}" method="POST">
+                    @csrf
+                    <label class="block mt-4 text-sm">
+                        <span class="text-gray-700 dark:text-gray-400">
+                        Seleccione Responsable
+                        </span>
+
+                        <select 
+                            class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-multiselect focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" 
+                            multiple
+                            name="responsable_id[]"
+                        >
+                            @foreach ($responsables as $responsable)
+                                <option value="{{ $responsable->id }}" {{ array_search($responsable->id, $medicamento->responsables->pluck('id')->toArray()) !== false ? 'selected' : '' }}>{{ $responsable->nombre }}</option>
+                            @endforeach
+                        
+                        </select>
+                    </label>
+
+                    <button 
+                        class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                        type="submit"
+                    >
+                    <span>Actualizar  responsables</span>
+                </button>
+
+                </form>
+            </p>
+        </div>
+    
+    </div>
 
 
     <form action="{{ route('medicamento.destroy', $medicamento) }}" method="POST">

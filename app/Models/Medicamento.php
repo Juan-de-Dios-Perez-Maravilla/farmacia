@@ -19,5 +19,10 @@ class Medicamento extends Model
 
     }
 
+    public function responsables()
+    {
+        return $this->belongsToMany(Responsable::class);
+    }
+
    // public $timestamps = false;
 }
