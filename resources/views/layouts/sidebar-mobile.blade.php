@@ -28,6 +28,7 @@
     >
         Farmacia Homeopática Sta. Edith Stein
     </a>
+    @auth
     <ul class="mt-6">
         <li class="relative px-6 py-3">
         <!-- Active items have the snippet below -->
@@ -140,6 +141,8 @@
         </template>
         </li>
     </ul>
+    @endauth
+
     @guest
 
     <div class="px-6 my-6">
