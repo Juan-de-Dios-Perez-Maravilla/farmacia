@@ -15,7 +15,7 @@ class MedicamentoController extends Controller
     public function index()
     {
         
-        $medicamentos = Auth::user()->medicamentos;
+        $medicamentos = Auth::user()->medicamentos()->with('user:id,name')->get();
 
         return view('medicamento.medicamento-index', compact('medicamentos'));
     }
