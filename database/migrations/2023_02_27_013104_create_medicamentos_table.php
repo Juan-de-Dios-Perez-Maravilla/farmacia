@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('precio');
             $table->string('propiedades');
             $table->string('laboratorio');
-            //$table->softDeletes();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
